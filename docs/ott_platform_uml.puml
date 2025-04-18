@@ -1,0 +1,142 @@
+@startuml OTT Platform UML
+
+' Styling
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classFontSize 14
+skinparam classBackgroundColor LightBlue
+skinparam classBorderColor DarkBlue
+
+' Package definition
+package "iub.ottplatform_iub" {
+    package "model" {
+        class User {
+            -userId: String
+            -username: String
+            -password: String
+            -role: String
+            +getUserId(): String
+            +getUsername(): String
+            +getPassword(): String
+            +getRole(): String
+        }
+
+        class Content {
+            -contentId: String
+            -title: String
+            -description: String
+            -genre: String
+            -language: String
+            -year: int
+            -rating: String
+            -uploaderId: String
+            -filePath: String
+            -thumbnailPath: String
+            -isApproved: boolean
+            +getContentId(): String
+            +getTitle(): String
+            +getDescription(): String
+            +getGenre(): String
+            +getLanguage(): String
+            +getYear(): int
+            +getRating(): String
+            +getUploaderId(): String
+            +isApproved(): boolean
+        }
+
+        class Subscription {
+            -subscriptionId: String
+            -userId: String
+            -planId: String
+            -startDate: Date
+            -endDate: Date
+            -status: String
+            +getSubscriptionId(): String
+            +getUserId(): String
+            +getPlanId(): String
+            +getStartDate(): Date
+            +getEndDate(): Date
+            +getStatus(): String
+        }
+    }
+
+    package "controller" {
+        class OTTPlatformApplication {
+            -currentUser: User
+            -dataStorageService: DataStorageService
+            +start(Stage): void
+            +getCurrentUser(): User
+            +getDataStorageService(): DataStorageService
+        }
+
+        class LoginController {
+            -usernameField: TextField
+            -passwordField: PasswordField
+            -errorLabel: Label
+            +handleLogin(): void
+            +handleRegister(): void
+        }
+
+        class UserDashboardController {
+            -contentList: VBox
+            -searchField: TextField
+            +initialize(): void
+            +handleSearch(): void
+            +handleLogout(): void
+        }
+
+        class UploaderDashboardController {
+            -contentList: VBox
+            -titleField: TextField
+            -descriptionField: TextArea
+            +initialize(): void
+            +handleUpload(): void
+            +handleLogout(): void
+        }
+
+        class ReviewerDashboardController {
+            -contentList: VBox
+            -statusFilter: ComboBox
+            +initialize(): void
+            +handleApprove(): void
+            +handleReject(): void
+            +handleLogout(): void
+        }
+    }
+
+    package "service" {
+        class DataStorageService {
+            -users: List<User>
+            -contents: List<Content>
+            -subscriptions: List<Subscription>
+            +saveUser(User): void
+            +loadUsers(): List<User>
+            +saveContent(Content): void
+            +loadContent(): List<Content>
+            +saveSubscription(Subscription): void
+            +loadSubscriptions(): List<Subscription>
+        }
+
+        class AuthenticationService {
+            -dataStorageService: DataStorageService
+            +authenticate(String, String): User
+            +register(User): boolean
+        }
+    }
+}
+
+' Relationships
+User "1" -- "0..*" Content : uploads >
+User "1" -- "0..*" Subscription : has >
+Content "1" -- "1" User : uploaded by >
+Subscription "1" -- "1" User : belongs to >
+
+OTTPlatformApplication --> DataStorageService : uses
+OTTPlatformApplication --> AuthenticationService : uses
+
+LoginController --> AuthenticationService : uses
+UserDashboardController --> DataStorageService : uses
+UploaderDashboardController --> DataStorageService : uses
+ReviewerDashboardController --> DataStorageService : uses
+
+@enduml 

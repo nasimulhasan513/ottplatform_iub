@@ -1,0 +1,1930 @@
+﻿CSE213 CRA Report of Group 31
+Spring 2025
+Topic: Simulating operations of a OTT platform such as bioscopelive, hoichoi/Toffee/Chorki
+	ID: 2022135
+	Name: Samnon Ahmed
+	User 1:  Basic User
+	User 2: Premium User
+	ID: 2230369
+	Name: Nasimul Hasan Deep
+	User 3:  Content Uploader
+	User 4:  Content Reviewer
+	ID: 2320107
+	Name: Afsana Anjum
+	Use 5:  Finance Manager
+	User 6: Subscription Manager
+	ID: 2210345
+	Name: Nabil Ahmed
+	User 7:  Report Viewer
+	User 8:  System Administrator
+	P.T.O
+  
+Possible event type:
+●      UIE -- user input to trigger event
+●      UID -- user input to be considered as data
+●      OP – display content (output)
+●      VL – validation check (usually for user input)
+●      VR – verification check (verify with existing application data)
+●      DP – fetching data from file system and process it to get some calculated outcome (data processing)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Common Workflows:
+Process-1: Login
+	 
+	 
+	event type
+	Workflow:
+	event-1
+	Enter email/username
+	UID
+	 
+	event-2
+	Enter password
+	UID
+	 
+	event-3
+	Validate input format
+	VL
+	 
+	event-4
+	Verify credentials with database
+	VR
+	 
+	event-5
+	Create user session
+	DP
+	 
+	event-6
+	Display success/error message
+	OP
+	 
+	 
+Process-2: Registration
+ 
+	 
+	 
+	event type
+	Workflow:
+	event-1
+	Enter personal information (name, email, etc.)
+	UID
+	 
+	event-2
+	Create password
+	UID
+	 
+	event-3
+	Validate email format
+	VL
+	 
+	event-4
+	Check password strength
+	VL
+	 
+	event-5
+	Verify email uniqueness
+	VR
+	 
+	event-6
+	Send verification email
+	DP
+	 
+	event-7
+	Create user account
+	DP
+	 
+	event-8
+	Display registration confirmation
+	OP
+	 
+	 
+ 
+
+
+
+
+Process-3: Forgot Password
+	 
+	 
+	event type
+	Workflow:
+	event-1
+	Enter email address
+	UID
+	 
+	event-2
+	Validate email format
+	VL
+	 
+	event-3
+	Verify email exists in database
+	VR
+	 
+	event-4
+	Generate reset token
+	DP
+	 
+	event-5
+	Send reset email
+	DP
+	 
+	event-6
+	Display confirmation message
+	OP
+	 
+	 
+ 
+Process-4: Reset Password
+	 
+	 
+	event type
+	Workflow:
+	event-1
+	Enter new password
+	UID
+	 
+	event-2
+	Confirm new password
+	UID
+	 
+	event-3
+	Validate password strength
+	VL
+	 
+	event-4
+	Verify reset token validity
+	VR
+	 
+	event-5
+	Update password in database
+	DP
+	 
+	event-6
+	Display success message
+	OP
+	 
+	 
+ 
+Process-5: Content Search
+	 
+	 
+	event type
+	Workflow:
+	event-1
+	Enter search keywords
+	UID, UIE
+	 
+	event-2
+	Apply filters (genre, language, year)
+	UID, UIE
+	 
+	event-3
+	Validate search criteria
+	VL
+	 
+	event-4
+	Process search query
+	DP
+	 
+	event-5
+	Display search results
+	OP
+	 
+	 
+Workflow of user specific goals:
+ 
+ 
+User1 name: Basic User
+	User-1, Goal-1
+	Goal-1: Login/Register
+Description: Basic User will be able to see the content list and watch the thumbnail of the content.
+	event type
+	Workflow:
+	event-1
+	Click login/register button
+ 
+	UIE:
+	 
+	event-2
+	Enter email and password
+	UID
+	 
+	event-3
+	Check if email format is valid
+	VL
+	 
+	event-4
+	Verify credentials against database
+	VR
+	 
+	event-5
+	Display success/error message
+	OP
+	 
+	event-6
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-1, :Goal-2
+	Goal-2: Browse Content Catalog
+Description: View available content with limited access
+	 
+	Workflow:
+	event-1
+	Select content category/genre
+	UIE
+	 
+	event-2
+	Apply content filters
+	UIE
+	 
+	event-3
+	Fetch filtered content list
+	DP
+	 
+	event-4
+	Display content grid/list
+	OP
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-1, Goal-3
+	Goal-3: Rate Content
+Description: Rate and review watched content
+	 
+	Workflow:
+	event-1
+	Rate content
+	UIE
+	 
+	event-2
+	Enter review text
+	UID
+	 
+	event-3
+	Submit review
+	DP
+	 
+	event-1
+	Rate content
+	UIE
+	 
+	event-n
+	…….
+	…….
+	 
+	User-1, Goal-4
+	Goal-4: Manage Profile
+ 
+	 
+	Workflow:
+	event-1
+	Edit profile
+	UIE
+	 
+	event-2
+	Update personal information
+	UID
+	 
+	event-3
+	Change password
+	UIE
+	 
+	event-4
+	Delete account
+	UIE
+	 
+	event-n
+	…….
+	…….
+	 
+	User-1, Goal-5
+	Goal-5: Search Content
+Description: Search for specific content using filters
+ 
+	 
+	Workflow:
+	event-1
+	Enter search keywords
+	UID
+	 
+	event-2
+	Apply search filters
+	UIE
+	 
+	event-3
+	Process search query
+	DP
+	 
+	event-4
+	Display search results
+	OP
+	 
+	
+
+	
+
+	
+
+	 
+	User-1, Goal-6
+	Goal-6: Manage Watchlist
+Description: Add/remove content to personal watchlist
+	 
+	Workflow:
+	event-1
+	Click add/remove from watchlist
+	UIE
+	 
+	event-2
+	Verify user authentication
+	VR
+	 
+	event-3
+	Update watchlist in database
+	DP
+	 
+	event-4
+	Display updated watchlist
+	OP
+	 
+	event-1
+	Click add/remove from watchlist
+	UIE
+	 
+	User-1, Goal-7
+	Goal-7: Manage Notifications
+Description: Control content and system notifications
+	 
+	Workflow:
+	event-1
+	Select notification type
+	UIE
+	 
+	event-2
+	Enter notification preferences
+	UID
+	 
+	event-3
+	Update notification settings
+	DP
+	 
+	event-4
+	Display updated notification settings
+	OP
+	 
+	event-n
+	 
+	 
+	 
+	User-1, Goal-8
+	Goal-8: Share Content
+Description: Share content on social media
+	 
+	Workflow:
+	event-1
+	Select content to share
+	UIE
+	 
+	event-2
+	Enter share message
+	UID
+	 
+	event-3
+	Select social platform
+	UIE
+	 
+	event-4
+	Process share request
+	DP
+	 
+	event-n
+	…….
+	…….
+	 
+ 
+ 
+ 
+
+
+ 
+ 
+User-2 name: Premium User
+	User-2, Goal-1
+	Goal-1: Watch Full Content
+Description: Access and watch complete video content
+ 
+	event type
+	Workflow:
+	event-1
+	Click play full video
+	UIE
+	 
+	event-2
+	Verify premium subscription
+	VR
+	 
+	event-3
+	Load video content
+	DP
+	 
+	event-4
+	Initialize HD video player
+	DP
+	 
+	event-5
+	Display video with premium features
+	OP
+	 
+	User-2, Goal-2
+	Goal-2: Download Content
+Description: Download content for offline viewing
+	 
+	Workflow:
+	event-1
+	Click download button
+	UIE
+	 
+	event-2
+	Verify premium status
+	VR
+	 
+	event-3
+	Check storage space
+	VL
+	 
+	event-4
+	Process video for offline viewing
+	DP
+	 
+	event-5
+	Save to local storage
+	DP
+	 
+	event-6
+	                               Display download progress
+	OP
+	 
+	User-2, Goal-3
+	Goal-3: Manage Playlists
+Description: Create and manage content playlists
+	 
+	Workflow:
+	event-1
+	Create new playlist
+	UIE
+	 
+	event-2
+	Add/remove content from playlist
+	UIE, UID
+	 
+	event-3
+	Save playlist changes
+	DP
+	 
+	event-4
+	Display updated playlist
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-2, Goal-4
+	Goal-4: Manage Parental Controls
+Description: Set up and manage content restrictions
+	 
+	Workflow:
+	event-1
+	Set content rating limits
+	UIE
+	 
+	event-2
+	Configure PIN protection
+	UID
+	 
+	event-3
+	Save parental control settings
+	DP
+	 
+	event-4
+	Display updated settings
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-2, Goal-5
+	Goal-5: Create Playlist
+Description: Create and manage content playlists
+	 
+	Workflow:
+	event-1
+	Select playlist name
+	UIE
+	 
+	event-2
+	Add content to playlist
+	UIE
+	 
+	event-3
+	Remove content from playlist
+	UIE
+	 
+	event-4
+	Update playlist
+	DP
+	 
+	event-5
+	Display playlist
+	OP
+	 
+	User-2, Goal-6
+	Goal-6: Manage Language Preferences
+Description: Set preferred audio and subtitle languages
+	 
+	Workflow:
+	event-1
+	Select audio language
+	UIE, UID
+	 
+	event-2
+	Select subtitle language
+	UIE, UID
+	 
+	event-3
+	Save language preferences
+	DP
+	 
+	event-4
+	Apply preferences to content
+	DP, OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-2, Goal-7
+	Goal-7: Manage Devices
+Description: Control and manage connected devices
+	 
+	Workflow:
+	event-1
+	Select device to manage
+	UIE
+	 
+	event-2
+	Enter device details
+	UID
+	 
+	event-3
+	Update device settings
+	DP
+	 
+	event-4
+	Display updated device status
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-2, Goal-8
+	Goal-8: Video Quality Settings
+Description: Manage streaming and download quality
+	 
+	Workflow:
+	event-1
+	Select video quality
+	UIE
+	 
+	event-2
+	Enter quality preferences
+	UID
+	 
+	event-3
+	Update quality settings
+	DP
+	 
+	event-4
+	Display updated quality settings
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+ 
+ 
+
+
+ 
+ 
+User-3 name: Content Uploader
+ 
+	User-3, Goal-1
+	Goal-1: Upload New Content
+Description: Upload and manage new video content
+	event type
+	Workflow:
+	event-1
+	Select video file
+	UIE
+	 
+	event-2
+	Enter content metadata
+	UID
+	 
+	event-3
+	Validate file format and size
+	VL
+	 
+	event-4
+	Process video encoding
+	DP
+	 
+	event-5
+	Generate video thumbnails
+	DP
+	 
+	event-6
+	Save to content database
+	DP
+	 
+	event-7
+	Display upload status
+	OP
+	 
+	User-3, Goal-2
+	Goal-2: Edit Content
+Description: Edit uploaded content details
+	 
+	Workflow:
+	event-1
+	Select content to edit
+	UIE
+	 
+	event-2
+	Enter new details
+	UID
+	 
+	event-3
+	Update content
+	DP
+	 
+	event-4
+	Display updated content
+	OP
+	 
+	event-1
+	Select content to edit
+	UIE
+	 
+	User-3, Goal-3
+	Goal-3: Manage Subtitles and Captions
+Description: Upload and manage multilingual subtitles
+	 
+	Workflow:
+	event-1
+	Upload subtitle file
+	UIE, UID
+	 
+	event-2
+	Select language and format
+	UID
+	 
+	event-3
+	Validate subtitle format
+	VL
+	 
+	event-4
+	Process and sync subtitles
+	DP
+	 
+	event-5
+	Preview subtitles
+	OP
+	 
+	User-3, Goal-4
+	Goal-4: View Content Performance
+Description: Monitor content engagement metrics
+	 
+	Workflow:
+	event-1
+	Select content to analyze
+	UIE
+	 
+	event-2
+	Enter analysis criteria
+	UID
+	 
+	event-3
+	Generate analytics report
+	DP
+	 
+	event-4
+	Display analytics results
+	OP
+	 
+	User-3, Goal-5
+	Goal-5: Batch Content Management
+Description: Perform operations on multiple content items
+	 
+	Workflow:
+	event-1
+	Select content items to manage
+	UIE
+	 
+	event-2
+	Enter batch operations
+	UID
+	 
+	event-3
+	Process batch operations
+	DP
+	 
+	event-4
+	Display batch results
+	OP
+	 
+	User-3, Goal-6
+	View Content Upload History
+	 
+	Workflow:
+	event-1
+	Navigate to “Upload History”
+	UIE
+	 
+	event-2
+	Select date range or filters
+	UID
+	 
+	event-3
+	Fetch upload data from DB/FILE
+	DP
+	 
+	event-4
+	Display content in table/list format
+	OP
+	 
+	User-3, Goal-7
+	Check Upload Performance
+	 
+	Workflow:
+	event-1
+	Click “Performance Analytics”
+	UIE
+	 
+	event-2
+	Select video to analyze
+	UID
+	 
+	event-3
+	Fetch views, likes, watch time data
+	DP
+	 
+	event-4
+	Display performance charts/summary
+	OP
+	 
+
+
+
+
+	User-3, Goal-8
+	Delete or Archive Content
+	 
+	Workflow:
+	event-1
+	Click “Delete/Archive” on selected video
+	UIE
+	 
+	event-2
+	Confirm deletion/archive action
+	UID
+	 
+	event-3
+	Verify permissions        
+	VR
+	 
+	event-4
+	Process content removal/archiving
+	DP
+	 
+	event-5
+	Show deletion confirmation
+	OP
+	 
+ 
+ 
+
+
+ 
+ 
+User-4 name: Content Reviewer
+	User-4, Goal-1
+	Goal-1: Content Approval
+Description: Review and approve/reject uploaded content
+	event type
+	Workflow:
+	event-1
+	Click approve/reject button
+	UIE
+	 
+	event-2
+	Enter approval/rejection comments
+	UID
+	 
+	event-3
+	Update content status
+	DP
+	 
+	event-4
+	Show updated content status
+	OP
+	 
+	User-4, Goal-2
+	Goal-2: Generate Reports
+Description: Create content review reports
+	 
+	Workflow:
+	event-1
+	Select report type
+	UIE
+	 
+	event-2
+	Enter report details
+	UID
+	 
+	event-3
+	Generate report
+	DP
+	 
+	event-4
+	Display report
+	OP
+	 
+	User-4, Goal-3
+	Goal-3: Moderate User Comments
+Description: Review and moderate user interactions
+	 
+	Workflow:
+	event-1
+	Select comment to moderate
+	UIE
+	 
+	event-2
+	Enter moderation action
+	UID
+	 
+	event-3
+	Update comment status
+	DP
+	 
+	event-4
+	Display updated comment status
+	OP
+	 
+	User-4, Goal-4
+	Goal-4: Quality Checks
+Description: Perform technical quality checks on content
+	 
+	Workflow:
+	event-1
+	Select content item to check
+	UIE
+	 
+	event-2
+	Enter check criteria
+	UID
+	 
+	event-3
+	Perform quality check
+	DP
+	 
+	event-4
+	Display check results
+	OP
+	 
+	User-4, Goal-5
+	Goal 5: Review Flagged Content
+	 
+	Workflow:
+	event-1
+	Open “Flagged Content” list
+	UIE
+	 
+	event-2
+	View video resolution/audio/encoding status
+	DP
+	 
+	event-3
+	Rate quality or flag for correction
+	UID
+	 
+	event-4
+	Save quality review to database
+	DP
+	 
+	event-5
+	Show confirmation or flagged result
+	OP
+	 
+	User-4, Goal-6
+	Goal 6: Audit Reviewer Activity
+	 
+	Workflow:
+	event-1
+	Click “My Review History”
+	UIE
+	 
+	event-2
+	Select date or status filter
+	UID
+	 
+	event-3
+	Validate date format
+	VL
+	 
+	event-4
+	Fetch audit logs
+	DP
+	 
+	event-5
+	Display activity log table
+	OP
+	 
+	User-4, Goal-7
+	Goal 7: Annotate Content Feedback for Uploader
+	 
+	Workflow:
+	event-1
+	Click “Add Review Feedback”
+	UIE
+	 
+	event-2
+	Enter specific notes (timestamp + comment)
+	UID
+	 
+	event-3
+	Validate note format and timestamp
+	VL
+	 
+	event-4
+	Save feedback to content entry
+	DP
+	 
+	event-5
+	Show confirmation or preview note
+	OP
+	 
+	User-4, Goal-8
+	Goal 8: Review Age Rating & Category Accuracy
+	 
+	Workflow:
+	event-1
+	Click “Content Classification Review”
+	UIE
+	 
+	event-2
+	Select content and view assigned ratings
+	UID
+	 
+	event-3
+	Verify if classification matches policy        
+	VR
+	 
+	event-4
+	Approve or suggest new category/rating
+	UID
+	 
+	event-5
+	Save updated classification
+	DP
+	 
+ 
+ 
+
+
+ 
+ 
+User-5 name: Finance Manager
+	User-5, Goal-1
+	Goal-1: Process Refunds
+Description: Handle user refund requests
+	event type
+	Workflow:
+	event-1
+	Click on "Refund Request" section
+	UIE
+	 
+	event-2
+	Enter user email or transaction ID
+	UID
+
+
+	 
+	event-3
+	 Validate input format
+	VL
+	 
+	event-4
+	Verify refund eligibility
+	VR
+	 
+	event-5
+	Process refund and update DB
+	DP
+	
+
+	event-6
+	Show success or failure message
+	OP
+
+
+	 
+	User-5, Goal-2
+	Goal-2: Generate Financial Reports
+Description: Create and view financial reports
+	 
+	Workflow:
+	event-1
+	Select "Generate Report" from menu
+	UIE
+	 
+	event-2
+	Choose report type (monthly/yearly)
+	UID
+	 
+	event-3
+	Enter date range        
+	UID
+	 
+	event-4
+	Validate date format
+	VL
+	 
+	event-5
+	Process and fetch data.
+	DP
+	
+
+	event-6
+	Display report (table/chart)
+	OP
+	 
+	User-5, Goal-3
+	Goal-3: Revenue Tracking
+Description: Monitor and analyze platform revenue
+	 
+	Workflow:
+	event-1
+	Click "Revenue Dashboard"
+	UIE
+	 
+	event-2
+	Select metrics (subscriptions/ads)
+	UID
+	 
+	event-3
+	Set date filters
+	UID
+	 
+	event-4
+	Validate input
+	VL
+	 
+	event-5
+	Calculate total revenue from DB
+	DP
+	
+
+	event-6
+	Show graphical revenue insights
+	OP
+	 
+	User-5, Goal-4
+	Goal-4: Manage Payment Methods
+Description: Configure and monitor payment gateways
+	 
+	Workflow:
+	event-1
+	Click "Payment Gateway Settings"
+	UIE
+	 
+	event-2
+	Select gateway (e.g., bKash, Stripe)
+	UID
+	 
+	event-3
+	Enter API credentials
+	UID
+	 
+	event-4
+	Validate credentials
+	VL
+	 
+	event-5
+	Test connection with gateway
+	VR
+	
+
+	event-6
+	Save config settings
+	DP
+	
+
+	event-7
+	Display confirmation message
+	OP
+	 
+	User-5, Goal-5
+	Description of Goal-5: Monitor Transactions
+
+
+
+
+	 
+	Workflow:
+	event-1
+	Navigate to "Transaction History"
+	UIE
+	 
+	event-2
+	Filter by user/date/amount        
+	UID
+	 
+	event-3
+	Validate filter entries
+	VL
+	 
+	event-4
+	Fetch transaction list
+	DP
+	 
+	event-5
+	Display transaction table.
+	OP
+	 
+	User-5, Goal-6
+	Description of Goal-6: Analyze Spending Patterns
+	 
+	Workflow:
+	event-1
+	Click "Spending Analysis"
+	UIE
+	 
+	event-2
+	Select user segment or plan
+	UID
+	 
+	event-3
+	Fetch spending records
+	DP
+	 
+	event-4
+	Analyze and calculate spending trends
+	DP
+	 
+	event-5
+	Show summary insights
+	OP
+	 
+	User-5, Goal-7
+	Description of Goal-7: Manage Promo & Discount Codes
+	 
+	Workflow:
+	event-1
+	Click "Manage Coupons"
+	UIE
+	 
+	event-2
+	Enter coupon code & discount %
+	UID
+	 
+	event-3
+	Validate code format & expiry date
+	VL
+	 
+	event-4
+	Check code uniqueness in DB        
+	VR
+	 
+	event-5
+	Save new promo code        
+	DP
+	
+
+	event-6
+	Display updated promo list
+	OP
+	
+
+	User-5, Goal-8
+	Description of Goal-8:  Edit Subscription Pricing
+	 
+	Workflow:
+	event-1
+	Open "Plan Pricing" settings
+	UIE
+	 
+	event-2
+	Select a subscription plan
+	UID
+	 
+	event-3
+	Enter a new price and billing period.
+	UID
+	 
+	event-4
+	Validate price input
+	VL
+	 
+	event-5
+	Save updated pricing to database        
+	DP
+	
+
+	event-6
+	Display new pricing structure confirmation
+	OP
+	 
+ 
+ 
+
+
+ 
+ 
+User-6 name:  Subscription Manager
+	User-6, Goal-1
+	Goal-1: Manage Subscription Plans
+Description: Create and manage subscription plans
+	event type
+	Workflow:
+	event-1
+	Click "Manage Plans" button
+	UIE
+	 
+	event-2
+	Select or create a new plan
+	UID
+	 
+	event-3
+	Enter plan details (name, price, duration)
+	UID
+	 
+	event-4
+	Validate data (empty fields, format)        
+	VL
+	 
+	event-5
+	Save or update plan in database
+	DP
+	
+
+	event-6
+	Show success/failure message
+	OP
+	 
+	User-6, Goal-2
+	Goal-2: Handle UserSubscriptions
+Description: Manage user subscriptions
+	 
+	Workflow:
+	event-1
+	Click "User Subscriptions" section
+	UIE
+	 
+	event-2
+	Select user or subscription ID
+	UID
+	 
+	event-3
+	Verify active status in DB
+	VR
+	 
+	event-4
+	Update subscription info
+	DP
+	 
+	event-5
+	Show updated status
+	OP
+	 
+	User-6, Goal-3
+	Goal-3: Manage Promotions
+Description: Create and manage subscription promotions 
+	 
+	Workflow:
+	event-1
+	Click "Manage Promotions"
+	UIE
+	 
+	event-2
+	Input promo details (code, % off, date)
+	UID
+	 
+	event-3
+	Validate code, date range
+	VL
+	 
+	event-4
+	Check for duplicate code
+	VR
+	 
+	event-5
+	Save promotion        
+	DP
+	
+
+	event-6
+	Display updated promo list
+	OP
+	 
+	User-6, Goal-4
+	Goal-4: Analyze Subscription Trends
+Description: Monitor subscription patterns and churn
+	 
+	Workflow:
+	event-1
+	Open "Trend Analysis"
+	UIE
+	 
+	event-2
+	Select filter criteria (e.g., timeframe)
+	UID
+	 
+	event-3
+	Fetch user trend data from DB
+	DP
+	 
+	event-4
+	Process & visualize trends (new/cancelled)
+	DP
+	 
+	event-5
+	Show line graph / bar chart
+	OP
+	 
+	User-6, Goal-5
+	Goal-5: Manage Notifications For Subscription
+Description: Configure subscription-related notifications
+	 
+	Workflow:
+	event-1
+	Click "Notification Settings"
+	UIE
+	 
+	event-2
+	Choose notification type (renewal, promo)
+	UID
+	 
+	event-3
+	Input frequency / message content
+	UID
+	 
+	event-4
+	Validate message format
+	VL
+	 
+	event-5
+	Save preferences to DB
+	DP
+	
+
+	event-6
+	Show updated preferences
+	OP
+	 
+	User-6, Goal-6
+	Description of Goal-6: Pause/Resume Subscriptions
+	 
+	Workflow:
+	event-1
+	Select user subscription        
+	UIE
+	 
+	event-2
+	Choose action (Pause or Resume)
+	UIE
+	 
+	event-3
+	Verify current subscription status
+	VR
+	 
+	event-4
+	Update DB accordingly
+	DP
+	 
+	event-5
+	Show confirmation
+	OP
+	 
+	User-6, Goal-7
+	Description of Goal-7: Export Subscription Reports
+	 
+	Workflow:
+	event-1
+	Click “Export Reports”.
+	UIE
+	 
+	event-2
+	Choose format (PDF, CSV).
+	UID
+	 
+	event-3
+	Validate format choice
+	VL
+	 
+	event-4
+	Fetch relevant data from DB.
+	DP
+	 
+	event-5
+	Process and generate exports.
+	DP
+	
+
+	event-6
+	Display download link or auto-download
+	OP
+	 
+	User-6, Goal-8
+	Description of Goal-8: View Plan-wise Subscriber Count
+	 
+	Workflow:
+	event-1
+	Click “Subscriber Summary”
+	UIE
+	 
+	event-2
+	Choose a subscription plan.
+	UID
+	 
+	event-3
+	Fetch count from database.
+	DP
+	 
+	event-4
+	Show results in a table or chart.
+	OP
+	 
+ 
+ 
+
+
+ 
+ 
+User-7 name: Report Viewer
+ 
+	User-7, Goal-1
+	Goal-1: View Analytics
+Description: Access and view platform analytics
+	event type
+	Workflow:
+	event-1
+	Select report type: user, content, subscription
+	UIE
+	 
+	event-2
+	Press button to load the report
+	UIE
+	 
+	event-3
+	Get analytics data
+	DP
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-2
+	Goal-2: Create Custom Reports
+Description: Generate customized analytics reports
+	 
+	Workflow:
+	event-1
+	Select report type
+	UIE
+	 
+	event-2
+	Enter report details
+	UID
+	 
+	event-3
+	Generate report
+	DP
+	 
+	event-4
+	Display report
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-3
+	Goal-3: Export Reports
+Description: Export analytics reports in various formats
+	 
+	Workflow:
+	event-1
+	Select report to export
+	UIE
+	 
+	event-2
+	Choose export format (PDF, Excel, etc.)
+	UID
+	 
+	event-3
+	Process export request
+	DP
+	 
+	event-4
+	Download exported file
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-4
+	Goal-4: Schedule Reports
+Description: Set up automated report generation schedules
+	 
+	Workflow:
+	event-1
+	Select report type
+	UIE
+	 
+	event-2
+	Enter report details
+	UID
+	 
+	event-3
+	Generate report
+	DP
+	 
+	event-4
+	Display report
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-5
+	Goal-5: Manage Report Templates
+Description: Create and manage report templates
+	 
+	Workflow:
+	event-1
+	Select template to manage
+	UIE
+	 
+	event-2
+	Enter template details
+	UID
+	 
+	event-3
+	Update template
+	DP
+	 
+	event-4
+	Display updated template
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-6
+	Description of Goal-6: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-7
+	Description of Goal-7: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-7, Goal-8
+	Description of Goal-8: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+ 
+ 
+
+
+ 
+ 
+User-8 name: System Administrator
+	User-8, Goal-1
+	Goal-1: Manage User Accounts
+Description: Manage system users and their access
+	event type
+	Workflow:
+	event-1
+	Select user account to manage
+	UIE
+	 
+	event-2
+	Enter account details
+	UID
+	 
+	event-3
+	Validate user information
+	VL
+	 
+	event-4
+	Update user database
+	DP
+	 
+	event-5
+	Display updated user status
+	OP
+	 
+	event-n
+	…….
+	…….
+	
+
+	
+
+	
+
+	
+
+	 
+	User-8, Goal-2
+	Goal-2: System Maintenance
+Description: Perform system maintenance tasks
+	 
+	Workflow:
+	event-1
+	Select maintenance task
+	UIE
+	 
+	event-2
+	Enter task details
+	UID
+	 
+	event-3
+	Perform task
+	DP
+	 
+	event-4
+	Display task completion
+	OP
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	event-n
+	…….
+	…….
+	 
+	User-8, Goal-3
+	Goal-3: Manage System Security
+Description: Configure and monitor security settings
+	 
+	Workflow:
+	event-1
+	Select security task
+	UIE
+	 
+	event-2
+	Enter task details
+	UID
+	 
+	event-3
+	Perform security task
+	DP
+	 
+	event-4
+	Display task completion
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-8, Goal-4
+	Goal-4: Manage System Backups
+Description: Configure and perform system backups
+	 
+	Workflow:
+	event-1
+	Select backup task
+	UIE
+	 
+	event-2
+	Enter backup details
+	UID
+	 
+	event-3
+	Perform backup
+	DP
+	 
+	event-4
+	Display backup status
+	OP
+	 
+	event-n
+	…….
+	…….
+	 
+	User-8, Goal-5
+	Description of Goal-5: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-8, Goal-6
+	Description of Goal-6: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-8, Goal-7
+	Description of Goal-7: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….
+	 
+	User-8, Goal-8
+	Description of Goal-8: …….
+	 
+	Workflow:
+	event-1
+	…….
+	…….
+	 
+	event-2
+	…….
+	…….
+	 
+	event-3
+	…….
+	…….
+	 
+	…
+	…….
+	…….
+	 
+	event-n
+	…….
+	…….

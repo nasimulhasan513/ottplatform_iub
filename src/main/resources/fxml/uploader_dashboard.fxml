@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="iub.ottplatform_iub.controller.UploaderDashboardController" 
+      style="-fx-background-color: #f5f5f5;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Label fx:id="welcomeLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <Button fx:id="logoutButton" text="Logout" onAction="#handleLogout" 
+                style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label text="Content Upload Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="10" style="-fx-padding: 10;">
+        <Label text="Upload New Content" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        
+        <GridPane hgap="10" vgap="10">
+            <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="titleField" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+            
+            <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextArea fx:id="descriptionField" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+            
+            <Label text="Genre:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="genreComboBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            
+            <Label text="Language:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+            <ComboBox fx:id="languageComboBox" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+            
+            <Label text="Year:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="yearField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            
+            <Label text="Rating:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+            <ComboBox fx:id="ratingComboBox" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+            
+            <Label text="Video File:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <Label fx:id="filePathLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            <Button text="Select Video" onAction="#handleSelectVideo" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+            
+            <Label text="Thumbnail:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="thumbnailPathLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            <Button text="Select Thumbnail" onAction="#handleSelectThumbnail" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+        </GridPane>
+        
+        <Label fx:id="errorLabel" style="-fx-text-fill: red;"/>
+        <Button fx:id="uploadButton" text="Upload Content" onAction="#handleUpload" 
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </VBox>
+
+    <Label text="Your Uploaded Content" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <VBox fx:id="contentList" spacing="10" style="-fx-padding: 10;"/>
+    </ScrollPane>
+</VBox> 

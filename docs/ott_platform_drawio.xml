@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-03-20T12:00:00.000Z" agent="Mozilla/5.0" version="21.7.4" etag="your-etag-here" type="device">
+  <diagram id="class-diagram" name="Class Diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Package: iub.ottplatform_iub -->
+        <mxCell id="package-ottplatform" value="iub.ottplatform_iub" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Package: model -->
+        <mxCell id="package-model" value="model" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="package-ottplatform">
+          <mxGeometry y="30" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- User Class -->
+        <mxCell id="class-user" value="User&#xa;- userId: String&#xa;- username: String&#xa;- password: String&#xa;- role: String&#xa;- email: String&#xa;- phone: String&#xa;- lastLogin: Date&#xa;- isActive: boolean&#xa;+ getUserId(): String&#xa;+ getUsername(): String&#xa;+ getPassword(): String&#xa;+ getRole(): String&#xa;+ getEmail(): String&#xa;+ getPhone(): String&#xa;+ getLastLogin(): Date&#xa;+ isActive(): boolean&#xa;+ setPassword(String): void&#xa;+ updateLastLogin(): void" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-model">
+          <mxGeometry y="30" width="200" height="280" as="geometry"/>
+        </mxCell>
+
+        <!-- Content Class -->
+        <mxCell id="class-content" value="Content&#xa;- contentId: String&#xa;- title: String&#xa;- description: String&#xa;- genre: String&#xa;- language: String&#xa;- year: int&#xa;- rating: String&#xa;- uploaderId: String&#xa;- filePath: String&#xa;- thumbnailPath: String&#xa;- isApproved: boolean&#xa;- uploadDate: Date&#xa;- views: int&#xa;- duration: int&#xa;- fileSize: long&#xa;+ getContentId(): String&#xa;+ getTitle(): String&#xa;+ getDescription(): String&#xa;+ getGenre(): String&#xa;+ getLanguage(): String&#xa;+ getYear(): int&#xa;+ getRating(): String&#xa;+ getUploaderId(): String&#xa;+ isApproved(): boolean&#xa;+ getUploadDate(): Date&#xa;+ getViews(): int&#xa;+ incrementViews(): void&#xa;+ getDuration(): int&#xa;+ getFileSize(): long" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-model">
+          <mxGeometry y="310" width="200" height="320" as="geometry"/>
+        </mxCell>
+
+        <!-- Subscription Class -->
+        <mxCell id="class-subscription" value="Subscription&#xa;- subscriptionId: String&#xa;- userId: String&#xa;- planId: String&#xa;- startDate: Date&#xa;- endDate: Date&#xa;- status: String&#xa;- paymentStatus: String&#xa;- autoRenew: boolean&#xa;- lastPaymentDate: Date&#xa;- nextBillingDate: Date&#xa;+ getSubscriptionId(): String&#xa;+ getUserId(): String&#xa;+ getPlanId(): String&#xa;+ getStartDate(): Date&#xa;+ getEndDate(): Date&#xa;+ getStatus(): String&#xa;+ getPaymentStatus(): String&#xa;+ isAutoRenew(): boolean&#xa;+ getLastPaymentDate(): Date&#xa;+ getNextBillingDate(): Date&#xa;+ updatePaymentStatus(String): void&#xa;+ setAutoRenew(boolean): void" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-model">
+          <mxGeometry y="630" width="200" height="280" as="geometry"/>
+        </mxCell>
+
+        <!-- Payment Class -->
+        <mxCell id="class-payment" value="Payment&#xa;- paymentId: String&#xa;- subscriptionId: String&#xa;- amount: double&#xa;- currency: String&#xa;- paymentDate: Date&#xa;- paymentMethod: String&#xa;- status: String&#xa;- transactionId: String&#xa;+ getPaymentId(): String&#xa;+ getSubscriptionId(): String&#xa;+ getAmount(): double&#xa;+ getCurrency(): String&#xa;+ getPaymentDate(): Date&#xa;+ getPaymentMethod(): String&#xa;+ getStatus(): String&#xa;+ getTransactionId(): String&#xa;+ processPayment(): boolean&#xa;+ refund(): boolean" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-model">
+          <mxGeometry y="910" width="200" height="240" as="geometry"/>
+        </mxCell>
+
+        <!-- Package: controller -->
+        <mxCell id="package-controller" value="controller" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="package-ottplatform">
+          <mxGeometry x="220" y="30" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- OTTPlatformApplication Class -->
+        <mxCell id="class-app" value="OTTPlatformApplication&#xa;- currentUser: User&#xa;- dataStorageService: DataStorageService&#xa;- authenticationService: AuthenticationService&#xa;- notificationService: NotificationService&#xa;+ start(Stage): void&#xa;+ getCurrentUser(): User&#xa;+ getDataStorageService(): DataStorageService&#xa;+ getAuthenticationService(): AuthenticationService&#xa;+ handleException(Exception): void&#xa;+ showError(String): void" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-controller">
+          <mxGeometry y="30" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- LoginController Class -->
+        <mxCell id="class-login" value="LoginController&#xa;- usernameField: TextField&#xa;- passwordField: PasswordField&#xa;- errorLabel: Label&#xa;- rememberMe: CheckBox&#xa;- forgotPasswordLink: Hyperlink&#xa;+ handleLogin(): void&#xa;+ handleRegister(): void&#xa;+ handleForgotPassword(): void&#xa;+ handleRememberMe(): void&#xa;+ validateInput(): boolean" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-controller">
+          <mxGeometry y="230" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- Package: service -->
+        <mxCell id="package-service" value="service" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="package-ottplatform">
+          <mxGeometry x="440" y="30" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- DataStorageService Class -->
+        <mxCell id="class-storage" value="DataStorageService&#xa;- users: List&lt;User&gt;&#xa;- contents: List&lt;Content&gt;&#xa;- subscriptions: List&lt;Subscription&gt;&#xa;- payments: List&lt;Payment&gt;&#xa;+ saveUser(User): void&#xa;+ loadUsers(): List&lt;User&gt;&#xa;+ saveContent(Content): void&#xa;+ loadContent(): List&lt;Content&gt;&#xa;+ saveSubscription(Subscription): void&#xa;+ loadSubscriptions(): List&lt;Subscription&gt;&#xa;+ savePayment(Payment): void&#xa;+ loadPayments(): List&lt;Payment&gt;&#xa;+ backupData(): void&#xa;+ restoreData(): void&#xa;+ validateData(): boolean" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-service">
+          <mxGeometry y="30" width="200" height="240" as="geometry"/>
+        </mxCell>
+
+        <!-- AuthenticationService Class -->
+        <mxCell id="class-auth" value="AuthenticationService&#xa;- dataStorageService: DataStorageService&#xa;- passwordEncoder: PasswordEncoder&#xa;- sessionManager: SessionManager&#xa;+ authenticate(String, String): User&#xa;+ register(User): boolean&#xa;+ resetPassword(String): boolean&#xa;+ validateSession(String): boolean&#xa;+ logout(String): void&#xa;+ handleFailedLogin(String): void" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-service">
+          <mxGeometry y="270" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- NotificationService Class -->
+        <mxCell id="class-notification" value="NotificationService&#xa;- emailService: EmailService&#xa;- smsService: SMSService&#xa;+ sendEmail(String, String, String): boolean&#xa;+ sendSMS(String, String): boolean&#xa;+ sendNotification(User, String): boolean&#xa;+ handleNotificationFailure(Exception): void" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="package-service">
+          <mxGeometry y="470" width="200" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- Relationships -->
+        <mxCell id="rel-user-content" value="uploads" style="endArrow=open;endFill=0;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="class-user" target="class-content">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-user-subscription" value="has" style="endArrow=open;endFill=0;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="class-user" target="class-subscription">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-subscription-payment" value="has" style="endArrow=open;endFill=0;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="class-subscription" target="class-payment">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-app-storage" value="uses" style="endArrow=open;endFill=0;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="class-app" target="class-storage">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-app-auth" value="uses" style="endArrow=open;endFill=0;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="class-app" target="class-auth">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel-app-notification" value="uses" style="endArrow=open;endFill=0;endSize=12;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="class-app" target="class-notification">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="sequence-auth" name="Authentication Sequence">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Actors and Participants -->
+        <mxCell id="actor-user" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="30" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="participant-login" value="LoginController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="100" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="participant-auth" value="AuthenticationService" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="40" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="participant-storage" value="DataStorageService" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="40" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="participant-notification" value="NotificationService" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="40" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Sequence Flow -->
+        <mxCell id="flow-1" value="Enter credentials" style="endArrow=block;endFill=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actor-user" target="participant-login">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="flow-2" value="authenticate(username, password)" style="endArrow=block;endFill=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="participant-login" target="participant-auth">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="flow-3" value="loadUsers()" style="endArrow=block;endFill=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="participant-auth" target="participant-storage">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="flow-4" value="return users" style="endArrow=block;endFill=1;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="participant-storage" target="participant-auth">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Alt Fragment -->
+        <mxCell id="alt-fragment" value="valid credentials" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="200" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Alt Flow -->
+        <mxCell id="flow-5" value="updateLastLogin(user)" style="endArrow=block;endFill=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="participant-auth" target="participant-storage">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="flow-6" value="sendLoginNotification(user)" style="endArrow=block;endFill=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="participant-auth" target="participant-notification">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint"/>
+            <mxPoint x="400" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile> 
