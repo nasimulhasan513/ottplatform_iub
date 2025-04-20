@@ -102,7 +102,25 @@ public class RegisterController {
     }
 
     private boolean isValidEmail(String email) {
-        return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+
+        if (email.isEmpty()) {
+            return false;
+        }
+
+        if (!email.contains("@")) {
+            return false;
+        }
+
+        if (!email.contains(".")) {
+            return false;
+        }
+
+        if (email.contains(" ")) {
+            return false;
+        }
+
+        return true;
+
     }
 
     private void loadDashboard(String userType) throws IOException {

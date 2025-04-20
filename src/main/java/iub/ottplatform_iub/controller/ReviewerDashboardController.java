@@ -36,15 +36,24 @@ public class ReviewerDashboardController {
     }
 
     private void loadContent() {
-        contentList.getChildren().clear();
+        // Clear all existing content boxes
+        if (contentList != null) {
+            contentList.getChildren().clear();
+            contentList.getChildren().removeAll(contentList.getChildren());
+        }
+
         List<Content> contents = OTTPlatformApplication.getDataStorageService().loadContent();
 
-        for (Content content : contents) {
-            if (statusFilter.getValue().equals("All") ||
-                    (statusFilter.getValue().equals("Pending") && !content.isApproved()) ||
-                    (statusFilter.getValue().equals("Approved") && content.isApproved())) {
-                VBox contentBox = createContentBox(content);
-                contentList.getChildren().add(contentBox);
+        if (contents != null) {
+            for (Content content : contents) {
+                if (statusFilter.getValue().equals("All") ||
+                        (statusFilter.getValue().equals("Pending") && !content.isApproved()) ||
+                        (statusFilter.getValue().equals("Approved") && content.isApproved())) {
+                    VBox contentBox = createContentBox(content);
+                    if (contentList != null) {
+                        contentList.getChildren().add(contentBox);
+                    }
+                }
             }
         }
     }
@@ -54,17 +63,26 @@ public class ReviewerDashboardController {
         box.setStyle("-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 5;");
 
         Label title = new Label("Title: " + content.getTitle());
-        title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;");
 
         Label description = new Label("Description: " + content.getDescription());
         description.setWrapText(true);
+        description.setStyle("-fx-text-fill: #000000;");
 
         HBox detailsBox = new HBox(10);
-        detailsBox.getChildren().addAll(
-                new Label("Genre: " + content.getGenre()),
-                new Label("Language: " + content.getLanguage()),
-                new Label("Year: " + content.getYear()),
-                new Label("Rating: " + content.getRating()));
+        Label genreLabel = new Label("Genre: " + content.getGenre());
+        genreLabel.setStyle("-fx-text-fill: #000000;");
+
+        Label languageLabel = new Label("Language: " + content.getLanguage());
+        languageLabel.setStyle("-fx-text-fill: #000000;");
+
+        Label yearLabel = new Label("Year: " + content.getYear());
+        yearLabel.setStyle("-fx-text-fill: #000000;");
+
+        Label ratingLabel = new Label("Rating: " + content.getRating());
+        ratingLabel.setStyle("-fx-text-fill: #000000;");
+
+        detailsBox.getChildren().addAll(genreLabel, languageLabel, yearLabel, ratingLabel);
 
         Label status = new Label("Status: " + (content.isApproved() ? "Approved" : "Pending"));
         status.setStyle("-fx-text-fill: " + (content.isApproved() ? "green" : "orange") + ";");
@@ -72,10 +90,12 @@ public class ReviewerDashboardController {
         Button approveButton = new Button("Approve");
         approveButton.setOnAction(e -> handleApproveContent(content));
         approveButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+        approveButton.setVisible(!content.isApproved());
 
         Button rejectButton = new Button("Reject");
         rejectButton.setOnAction(e -> handleRejectContent(content));
         rejectButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
+        rejectButton.setVisible(!content.isApproved());
 
         HBox buttonBox = new HBox(10, approveButton, rejectButton);
         buttonBox.setStyle("-fx-alignment: center;");

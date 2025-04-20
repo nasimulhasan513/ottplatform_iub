@@ -9,6 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import iub.ottplatform_iub.OTTPlatformApplication;
 import iub.ottplatform_iub.model.Content;
 import iub.ottplatform_iub.model.User;
@@ -21,7 +23,19 @@ public class UploaderDashboardController {
     @FXML
     private Label welcomeLabel;
     @FXML
-    private VBox contentList;
+    private TableView<Content> contentTable;
+    @FXML
+    private TableColumn<Content, String> titleColumn;
+    @FXML
+    private TableColumn<Content, String> genreColumn;
+    @FXML
+    private TableColumn<Content, String> languageColumn;
+    @FXML
+    private TableColumn<Content, Integer> yearColumn;
+    @FXML
+    private TableColumn<Content, String> ratingColumn;
+    @FXML
+    private TableColumn<Content, String> statusColumn;
     @FXML
     private Button uploadButton;
     @FXML
@@ -47,6 +61,7 @@ public class UploaderDashboardController {
 
     private File selectedVideoFile;
     private File selectedThumbnailFile;
+    private ObservableList<Content> contentList;
 
     @FXML
     public void initialize() {
@@ -58,34 +73,36 @@ public class UploaderDashboardController {
         languageComboBox.getItems().addAll("English", "Bengali", "Hindi", "Tamil");
         ratingComboBox.getItems().addAll("G", "PG", "PG-13", "R", "NC-17");
 
+        // Initialize table columns
+        titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
+        genreColumn.setCellValueFactory(cellData -> cellData.getValue().genreProperty());
+        languageColumn.setCellValueFactory(cellData -> cellData.getValue().languageProperty());
+        yearColumn.setCellValueFactory(cellData -> cellData.getValue().yearProperty().asObject());
+        ratingColumn.setCellValueFactory(cellData -> cellData.getValue().ratingProperty());
+        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+
+        contentList = FXCollections.observableArrayList();
+        contentTable.setItems(contentList);
+
         loadContent();
     }
 
     private void loadContent() {
-        contentList.getChildren().clear();
+        contentList.clear(); // Clear existing content
         List<Content> contents = OTTPlatformApplication.getDataStorageService().loadContent();
+        System.out.println("Loading content for user: " + OTTPlatformApplication.getCurrentUser().getUserId());
+
         for (Content content : contents) {
+            System.out.println("Checking content: " + content.getTitle() +
+                    ", Uploader ID: " + content.getUploaderId() +
+                    ", Current User ID: " + OTTPlatformApplication.getCurrentUser().getUserId());
+
             if (content.getUploaderId().equals(OTTPlatformApplication.getCurrentUser().getUserId())) {
-                VBox contentBox = new VBox(5);
-                contentBox.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5;");
-
-                Label titleLabel = new Label("Title: " + content.getTitle());
-                titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-
-                Label descriptionLabel = new Label("Description: " + content.getDescription());
-                descriptionLabel.setWrapText(true);
-
-                HBox detailsBox = new HBox(10);
-                detailsBox.getChildren().addAll(
-                        new Label("Genre: " + content.getGenre()),
-                        new Label("Language: " + content.getLanguage()),
-                        new Label("Year: " + content.getYear()),
-                        new Label("Rating: " + content.getRating()));
-
-                contentBox.getChildren().addAll(titleLabel, descriptionLabel, detailsBox);
-                contentList.getChildren().add(contentBox);
+                System.out.println("Adding content to table: " + content.getTitle());
+                contentList.add(content);
             }
         }
+        System.out.println("Total content loaded in table: " + contentList.size());
     }
 
     @FXML
@@ -154,6 +171,9 @@ public class UploaderDashboardController {
 
         OTTPlatformApplication.getDataStorageService().saveContent(content);
 
+        // Add the new content to the table
+        contentList.add(content);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Upload Successful");
         alert.setHeaderText(null);
@@ -162,7 +182,6 @@ public class UploaderDashboardController {
 
         // Clear form
         clearForm();
-        loadContent();
     }
 
     private void clearForm() {

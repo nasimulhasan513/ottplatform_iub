@@ -48,12 +48,20 @@ public class DataStorageService {
     // Content operations
     public void saveContent(Content content) {
         List<Content> contents = loadContent();
+        System.out.println("Saving content. Current content count: " + contents.size());
+        System.out.println("New content details: " + content.getTitle() + ", ID: " + content.getContentId());
         contents.add(content);
         saveObject(contents, CONTENT_FILE);
+        System.out.println("Content saved successfully. New content count: " + contents.size());
     }
 
     public List<Content> loadContent() {
-        return loadObject(CONTENT_FILE);
+        List<Content> contents = loadObject(CONTENT_FILE);
+        System.out.println("Loading content from file. Content count: " + contents.size());
+        for (Content content : contents) {
+            System.out.println("Loaded content: " + content.getTitle() + ", ID: " + content.getContentId());
+        }
+        return contents;
     }
 
     public Content findContentById(String contentId) {
@@ -101,13 +109,20 @@ public class DataStorageService {
     @SuppressWarnings("unchecked")
     private <T> List<T> loadObject(String filePath) {
         File file = new File(filePath);
+        System.out.println("Attempting to load from file: " + filePath);
+        System.out.println("File exists: " + file.exists());
+
         if (!file.exists()) {
+            System.out.println("File does not exist, returning empty list");
             return new ArrayList<>();
         }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-            return (List<T>) ois.readObject();
+            List<T> loadedList = (List<T>) ois.readObject();
+            System.out.println("Successfully loaded " + loadedList.size() + " items from file");
+            return loadedList;
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading from file: " + e.getMessage());
             e.printStackTrace();
             return new ArrayList<>();
         }
