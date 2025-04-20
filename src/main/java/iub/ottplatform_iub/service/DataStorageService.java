@@ -49,8 +49,22 @@ public class DataStorageService {
     public void saveContent(Content content) {
         List<Content> contents = loadContent();
         System.out.println("Saving content. Current content count: " + contents.size());
-        System.out.println("New content details: " + content.getTitle() + ", ID: " + content.getContentId());
-        contents.add(content);
+        System.out.println("Content details: " + content.getTitle() + ", ID: " + content.getContentId());
+
+        // Find and update existing content or add new content
+        boolean contentExists = false;
+        for (int i = 0; i < contents.size(); i++) {
+            if (contents.get(i).getContentId().equals(content.getContentId())) {
+                contents.set(i, content);
+                contentExists = true;
+                break;
+            }
+        }
+
+        if (!contentExists) {
+            contents.add(content);
+        }
+
         saveObject(contents, CONTENT_FILE);
         System.out.println("Content saved successfully. New content count: " + contents.size());
     }

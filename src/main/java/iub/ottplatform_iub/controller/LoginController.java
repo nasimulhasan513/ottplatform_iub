@@ -28,11 +28,11 @@ public class LoginController {
 
     @FXML
     private void handleLogin() {
-        // String email = "testuploader@gmail.com"; // emailField.getText();
-        // String password = "testuploader"; // passwordField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
 
-        String email = "testreviewer@gmail.com";
-        String password = "testreviewer";
+        // String email = "testreviewer@gmail.com";
+        // String password = "testreviewer";
 
         // email and password validation
         if (email.isEmpty() || password.isEmpty()) {
