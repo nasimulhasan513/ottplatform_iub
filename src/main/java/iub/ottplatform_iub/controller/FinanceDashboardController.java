@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import iub.ottplatform_iub.OTTPlatformApplication;
 import iub.ottplatform_iub.model.Subscription;
@@ -19,9 +18,7 @@ public class FinanceDashboardController {
     @FXML
     private Label totalRevenueLabel;
     @FXML
-    private Label activeSubscriptionsLabel;
-    @FXML
-    private VBox refundList;
+    private Label totalUsersLabel;
     @FXML
     private Button logoutButton;
 
@@ -41,39 +38,12 @@ public class FinanceDashboardController {
                 .sum();
         totalRevenueLabel.setText(String.format("$%.2f", totalRevenue));
 
-        // Count active subscriptions
-        long activeCount = subscriptions.stream()
-                .filter(Subscription::isActive)
+        // Count total users
+        long totalUsers = subscriptions.stream()
+                .map(Subscription::getUserId)
+                .distinct()
                 .count();
-        activeSubscriptionsLabel.setText(String.valueOf(activeCount));
-
-        // Load refund requests (placeholder)
-        loadRefundRequests();
-    }
-
-    private void loadRefundRequests() {
-        refundList.getChildren().clear();
-        // This would be replaced with actual refund request data
-        Label placeholder = new Label("No refund requests pending");
-        refundList.getChildren().add(placeholder);
-    }
-
-    @FXML
-    private void handleGenerateReport() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Report Generated");
-        alert.setHeaderText(null);
-        alert.setContentText("Financial report has been generated successfully.");
-        alert.showAndWait();
-    }
-
-    @FXML
-    private void handleConfigurePayment() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Payment Configuration");
-        alert.setHeaderText(null);
-        alert.setContentText("Payment gateway configuration options will be available here.");
-        alert.showAndWait();
+        totalUsersLabel.setText(String.valueOf(totalUsers));
     }
 
     @FXML

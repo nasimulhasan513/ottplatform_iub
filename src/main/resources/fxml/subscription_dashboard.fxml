@@ -23,11 +23,19 @@
     <TabPane>
         <Tab text="Manage Plans">
             <VBox spacing="10" style="-fx-padding: 10;">
-                <Button text="Create New Plan" onAction="#handleCreatePlan" 
-                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-                <ScrollPane fitToWidth="true">
-                    <VBox fx:id="planList" spacing="10"/>
-                </ScrollPane>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Create New Plan" onAction="#handleCreatePlan" 
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                </HBox>
+                <TableView fx:id="planTable" style="-fx-background-color: white;">
+                    <columns>
+                        <TableColumn fx:id="planNameColumn" text="Plan Name"/>
+                        <TableColumn fx:id="planPriceColumn" text="Price"/>
+                        <TableColumn fx:id="planDurationColumn" text="Duration (Months)"/>
+                        <TableColumn fx:id="planStatusColumn" text="Status"/>
+                        <TableColumn fx:id="planActionsColumn" text="Actions"/>
+                    </columns>
+                </TableView>
             </VBox>
         </Tab>
 
@@ -37,20 +45,20 @@
                     <TextField fx:id="searchField" promptText="Search by user..."/>
                     <Button text="Search" onAction="#handleSearch"/>
                 </HBox>
-                <ScrollPane fitToWidth="true">
-                    <VBox fx:id="subscriptionList" spacing="10"/>
-                </ScrollPane>
+                <TableView fx:id="subscriptionTable" style="-fx-background-color: white;">
+                    <columns>
+                        <TableColumn fx:id="userIdColumn" text="User ID"/>
+                        <TableColumn fx:id="planTypeColumn" text="Plan Type"/>
+                        <TableColumn fx:id="startDateColumn" text="Start Date"/>
+                        <TableColumn fx:id="endDateColumn" text="End Date"/>
+                        <TableColumn fx:id="priceColumn" text="Price"/>
+                        <TableColumn fx:id="statusColumn" text="Status"/>
+                        <TableColumn fx:id="actionsColumn" text="Actions"/>
+                    </columns>
+                </TableView>
             </VBox>
         </Tab>
 
-        <Tab text="Promotions">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <Button text="Create Promotion" onAction="#handleCreatePromotion" 
-                        style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
-                <ScrollPane fitToWidth="true">
-                    <VBox fx:id="promotionList" spacing="10"/>
-                </ScrollPane>
-            </VBox>
-        </Tab>
+       
     </TabPane>
 </VBox> 

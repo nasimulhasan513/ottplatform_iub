@@ -31,8 +31,8 @@ public class LoginController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // String email = "testreviewer@gmail.com";
-        // String password = "testreviewer";
+        // String email = "testfinance@gmail.com";
+        // String password = "testfinance";
 
         // email and password validation
         if (email.isEmpty() || password.isEmpty()) {
@@ -40,6 +40,7 @@ public class LoginController {
             return;
         }
 
+        // check from db -> file
         User user = OTTPlatformApplication.getDataStorageService().findUserByEmail(email);
         if (user == null || !user.getPassword().equals(password)) {
             errorLabel.setText("Invalid email or password");

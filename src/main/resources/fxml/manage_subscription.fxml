@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: #f5f5f5;" 
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="iub.ottplatform_iub.controller.ManageSubscriptionController">
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <Text text="Manage Subscription" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 5;">
+        <GridPane hgap="10" vgap="10">
+            <Label text="User ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="userIdLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Plan Type:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="planTypeLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Start Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="startDateLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="End Date:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <Label fx:id="endDateLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Price:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <Label fx:id="priceLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Status:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="statusLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <Label text="Payment Method:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <Label fx:id="paymentMethodLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <Separator/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Cancel Subscription" onAction="#handleCancelSubscription" 
+                    style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            <Button text="Extend Subscription" onAction="#handleExtendSubscription" 
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+</VBox> 

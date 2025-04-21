@@ -33,7 +33,13 @@
                 style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
     </HBox>
 
-    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
-        <VBox fx:id="contentList" spacing="10" style="-fx-padding: 10;"/>
-    </ScrollPane>
+    <TableView fx:id="contentTable" style="-fx-background-color: white;">
+        <columns>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="200"/>
+            <TableColumn fx:id="genreColumn" text="Genre" prefWidth="100"/>
+            <TableColumn fx:id="languageColumn" text="Language" prefWidth="100"/>
+            <TableColumn fx:id="yearColumn" text="Year" prefWidth="80"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="200"/>
+        </columns>
+    </TableView>
 </VBox> 

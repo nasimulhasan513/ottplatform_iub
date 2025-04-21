@@ -3,6 +3,7 @@ package iub.ottplatform_iub.service;
 import iub.ottplatform_iub.model.User;
 import iub.ottplatform_iub.model.Content;
 import iub.ottplatform_iub.model.Subscription;
+import iub.ottplatform_iub.model.SubscriptionPlan;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class DataStorageService {
     private static final String USERS_FILE = DATA_DIR + "/users.dat";
     private static final String CONTENT_FILE = DATA_DIR + "/content.dat";
     private static final String SUBSCRIPTIONS_FILE = DATA_DIR + "/subscriptions.dat";
+    private static final String PLANS_FILE = DATA_DIR + "/plans.dat";
 
     public DataStorageService() {
         createDataDirectory();
@@ -111,8 +113,44 @@ public class DataStorageService {
                 .orElse(null);
     }
 
+    // Subscription Plan operations
+    public void saveSubscriptionPlan(SubscriptionPlan plan) {
+        List<SubscriptionPlan> plans = loadSubscriptionPlans();
+        plans.add(plan);
+        saveObject(plans, PLANS_FILE);
+    }
+
+    public List<SubscriptionPlan> loadSubscriptionPlans() {
+        return loadObject(PLANS_FILE);
+    }
+
+    public SubscriptionPlan findPlanById(String planId) {
+        List<SubscriptionPlan> plans = loadSubscriptionPlans();
+        return plans.stream()
+                .filter(plan -> plan.getPlanId().equals(planId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void updateSubscriptionPlan(SubscriptionPlan updatedPlan) {
+        List<SubscriptionPlan> plans = loadSubscriptionPlans();
+        for (int i = 0; i < plans.size(); i++) {
+            if (plans.get(i).getPlanId().equals(updatedPlan.getPlanId())) {
+                plans.set(i, updatedPlan);
+                break;
+            }
+        }
+        saveObject(plans, PLANS_FILE);
+    }
+
+    public void deleteSubscriptionPlan(String planId) {
+        List<SubscriptionPlan> plans = loadSubscriptionPlans();
+        plans.removeIf(plan -> plan.getPlanId().equals(planId));
+        saveObject(plans, PLANS_FILE);
+    }
+
     // Generic save/load methods
-    private <T> void saveObject(T object, String filePath) {
+    public <T> void saveObject(T object, String filePath) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(object);
         } catch (IOException e) {

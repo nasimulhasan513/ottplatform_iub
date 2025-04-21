@@ -20,7 +20,7 @@ public class OTTPlatformApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root);
         primaryStage.setTitle("OTT Platform");
         primaryStage.setScene(scene);
         primaryStage.show();

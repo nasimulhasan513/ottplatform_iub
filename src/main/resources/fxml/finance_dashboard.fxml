@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="iub.ottplatform_iub.controller.FinanceDashboardController" 
-      style="-fx-background-color: #f5f5f5;">
+      style="-fx-background-color: #f5f5f5;" spacing="20">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -20,35 +20,14 @@
 
     <Label text="Finance Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
 
-    <TabPane>
-        <Tab text="Revenue Overview">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <HBox spacing="10">
-                    <Label text="Total Revenue:" style="-fx-font-weight: bold;"/>
-                    <Label fx:id="totalRevenueLabel"/>
-                </HBox>
-                <HBox spacing="10">
-                    <Label text="Active Subscriptions:" style="-fx-font-weight: bold;"/>
-                    <Label fx:id="activeSubscriptionsLabel"/>
-                </HBox>
-                <Button text="Generate Report" onAction="#handleGenerateReport" 
-                        style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
-            </VBox>
-        </Tab>
-
-        <Tab text="Refund Requests">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <ScrollPane fitToWidth="true">
-                    <VBox fx:id="refundList" spacing="10"/>
-                </ScrollPane>
-            </VBox>
-        </Tab>
-
-        <Tab text="Payment Methods">
-            <VBox spacing="10" style="-fx-padding: 10;">
-                <Button text="Configure Payment Gateways" onAction="#handleConfigurePayment" 
-                        style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
-            </VBox>
-        </Tab>
-    </TabPane>
+    <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: white; -fx-background-radius: 10;">
+        <HBox spacing="10">
+            <Label text="Total Users:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+            <Label fx:id="totalUsersLabel" style="-fx-font-size: 16px;"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Total Revenue:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+            <Label fx:id="totalRevenueLabel" style="-fx-font-size: 16px;"/>
+        </HBox>
+    </VBox>
 </VBox> 
